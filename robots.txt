@@ -1,0 +1,5 @@
+# TODO: Replace the placeholder domain before deployment.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.example.com/sitemap.xml
