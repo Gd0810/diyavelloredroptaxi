@@ -47,6 +47,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 24px);
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 [hidden] {
@@ -55,8 +57,11 @@ html {
 
 body {
   margin: 0;
+  width: 100%;
   min-width: 320px;
+  max-width: 100%;
   overflow-x: hidden;
+  position: relative;
   color: var(--text);
   background: var(--white);
   font-family: "Outfit", sans-serif;
@@ -66,7 +71,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body.menu-open,
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
 body.lightbox-open {
   overflow: hidden;
 }
@@ -418,6 +429,7 @@ ol {
 
 /* 04. Header and navigation ------------------------------------------------ */
 .site-header {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -1288,6 +1300,8 @@ ol {
 /* 10B. Testimonial carousel ------------------------------------------------- */
 .testimonial-carousel {
   min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 html:not(.js) .carousel-controls,
@@ -1302,6 +1316,7 @@ html:not(.js) .testimonials-viewport {
 
 .testimonials-viewport {
   overflow: hidden;
+  contain: paint;
   padding: 6px;
   margin: -6px;
 }
@@ -2600,6 +2615,9 @@ textarea.form-control {
     top: calc(100% + 8px);
     right: 0;
     left: 0;
+    max-height: calc(100dvh - var(--header-height) - 24px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     visibility: hidden;
     padding: 15px;
     border: 1px solid var(--border);
@@ -2769,6 +2787,11 @@ textarea.form-control {
 
   .contact-intro {
     position: static;
+  }
+
+  .js .reveal.reveal--left,
+  .js .reveal.reveal--right {
+    transform: translateY(20px);
   }
 }
 
